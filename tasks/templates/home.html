@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="container py-5 mb-5">
+  <section class="card card-body py-5 mb-5">
+      <h1 class="display-1 text-center">NotasApp</h1>
+      <p>
+        NotasApp te da lo básico, y lo hace con estilo. 
+        Su diseño e interfaz simples y minimalistas ponen todo 
+        lo que necesitas al alcance de tus dedos. Cierto, es posible 
+        que no puedas anotar documentos y crear gráficos complejos, 
+        pero ¿es eso realmente algo que necesitas en una app de notas 
+        o de memoria? Probablemente no. NotasApp hace el trabajo, 
+        lo hace bien y no te cuesta absolutamente nada. 
+        Definitivamente, clasificaría esta app entre las mejores 
+        aplicaciones de notas que existen.
+      </p>
+      {% if not user.is_authenticated %}
+      <div class="text-center">
+        <a class="btn btn-secondary" href="/signin">Login</a>
+        <a class="btn btn-dark" href="/signup">Signup</a>
+      </div>
+      {% endif %}
+  </section>
+</main>
+
+{% endblock %}

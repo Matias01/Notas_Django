@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<main class="container mb-5">
+  <div class="mb-5">
+    <section class="card card-body col-md-6 offset-md-3 mt-5 mb-5">
+      <h1 class="text-center display-3 py-5">Lista de Tareas</h1>
+      <ul class="list-group">
+        {% for task in tasks %}
+        {% if not task.datecompleted %}
+          <a class="list-group-item" href="{% url 'task_detail' task.id %}">
+            <header class="d-flex justify-content-between">
+              {% if task.important %}
+              <h1 class="fw-bold text-success">{{task.title}}</h1>
+              {% else %}
+              <h1 class="fw-bold">{{task.title}} </h1>
+              {% endif %}
+              <p class="text-muted">{{task.user.username}}</p>
+            </header>
+            <p class="text-secondary">{{task.description}}</p>
+      
+            {{task.datecompleted|date:'M j Y:i'}}
+          </a>
+          {% else %}
+          <li class="list-group-item">
+            <header class="d-flex justify-content-between">
+              {% if task.important %}
+              <h1 class="fw-bold text-success">{{task.title}}</h1>
+              {% else %}
+              <h1 class="fw-bold">{{task.title}} </h1>
+              {% endif %}
+              <p>{{task.user.username}}</p>
+            </header>
+            <p>{{task.description}}</p>
+      
+            {{task.datecompleted|date:'M j Y:i'}}
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+</main>
+
+{% endblock %}

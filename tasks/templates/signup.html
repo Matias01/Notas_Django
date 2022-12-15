@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+
+<main class="container mb-4">
+  <div class="row mb-1">
+    <div class="col-md-4 offset-md-4 mt-5">
+      {% if user.is_authenticated %}
+        <h1 class="card card-body text-center">Usted ya se encuentra registrado!</h1>
+      {% else %}
+      <form class="card card-body text-center" action="/signup/" method="POST" data-form>{% csrf_token %}
+        <h1 class="text-center">Signup</h1>
+        <p class="error">{{error}}</p>
+        {% comment %} {{form.as_p}} {% endcomment %}
+        <div class="mb-3">
+          <label for="username">Usuario:</label>
+          <input type="text" name="username" class="form-control" 
+          placeholder="Usuario" id="username" required data-name>
+        </div>
+        <div class="mb-3">
+          <label for="password1">Contraseña:</label>
+          <input type="password" name="password1" class="form-control" 
+          placeholder="Contraseña" id="password1" minlength="6" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-.,]).{6,}$" required>
+        </div>
+        <div class="mb-3">
+          <label for="password2">Repita su Contraseña:</label>
+          <input type="password" name="password2" class="form-control" 
+          placeholder="Repita su Contraseña" id="password2" minlength="6" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-.,]).{6,}$" required>
+        </div>
+        <small>Debe incluir Mayúsculas, minúsculas y números</small>
+        <small class="mb-3">Debe tener al menos 6 dígitos</small>
+
+        <input type="submit" class="btn btn-primary" value="Signup">
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</main>
+<script src="{% static 'core/js/scripts.js' %}"></script>
+
+{% endblock %}

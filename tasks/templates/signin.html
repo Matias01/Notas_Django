@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container mb-5">
+  <div class="row mb-5">
+    <section class="col-md-4 offset-md-4 mt-5 mb-2">
+      {% if user.is_authenticated %}
+        <h1 class="card card-body text-center">Usted ya se encuentra dentro de la aplicación!</h1>
+      {% else %}
+      <form class="card card-body" action="/signin/" method="POST">{% csrf_token %}
+        {% comment %} {{form.as_p}} {% endcomment %}
+        <h1 class="text-center">Login</h1>
+        <p class="error">{{error}}</p>
+        <div class="mb-3">
+          <label for="username">Usuario:</label>
+          <input type="text" name="username" class="form-control" 
+          placeholder="Usuario" id="username" required>
+        </div>
+        <div class="mb-3">
+          <label for="password">Contraseña:</label>
+          <input type="password" name="password" class="form-control" 
+          placeholder="Contraseña" id="password" required>
+        </div>
+        <button class="btn btn-primary">Login</button>
+      </form>
+      {% endif %}
+    </section>
+  </div>
+</main>
+
+{% endblock %}

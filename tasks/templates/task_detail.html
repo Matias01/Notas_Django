@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <section class="col-md-4 offset-md-4 mt-5">
+      <h1 class="text-secondary">{{task.title}}</h1>
+      <p class="error">{{error}}</p>
+      <form method="POST">{% csrf_token %}
+        {{form.as_p}}
+      
+        <button class="btn btn-primary">Actualizar</button>
+      </form>
+      <div class="d-flex mt-2">
+        <form class="me-2" action="{% url 'complete_task' task.id %}" method="POST">{% csrf_token %}
+          <button class="btn btn-secondary">Completar</button>
+        </form>
+        
+        <form action="{% url 'delete_task' task.id %}" method="POST">{% csrf_token %}
+          <button class="btn btn-danger">Eliminar</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+
+
+{% endblock %}
